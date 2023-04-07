@@ -32,20 +32,30 @@
                     <ul class="navbar-nav me-auto">
 
                     </ul>
-                    @dump(session())
+                    {{-- @dump(session()) --}}
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
                         @guest
-                            @if (Route::has('login'))
+                            @if (Route::is('login'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                                 </li>
                             @endif
+                            @if (Route::is('admin.login-view'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('admin.login-view') }}">{{ __('Login') }}</a>
+                                </li>
+                            @endif
 
-                            @if (Route::has('register'))
+                            @if (Route::has('register') && Route::is('login') )
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                </li>
+                            @endif
+                            @if (Route::has('admin.register-view') && Route::is('admin.login-view'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('admin.register-view') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
                         @else

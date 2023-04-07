@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\Admin\RoleController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Authorization;
+use App\Http\Controllers\HomeController;
 use App\Http\Middleware\Authenticate;
 
 /*
@@ -23,7 +25,18 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/admin',[LoginController::class,'showAdminLoginForm'])->name('admin.login-view');
+
+
+
+//laravel permisstion
+Route::get('/set-role',[RoleController::class,'create'])->name('set-role');
+
+//products route
+Route::get('/products',[HomeController::class,'products'])->name('products');
+
+
+
+Route::get('/admin/login',[LoginController::class,'showAdminLoginForm'])->name('admin.login-view');
 Route::post('/admin',[LoginController::class,'adminLogin'])->name('admin.login');
 Route::post('/admin/logout',[LoginController::class,'adminLogout'])->name('admin.logout');
 
